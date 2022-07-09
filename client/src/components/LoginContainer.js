@@ -1,5 +1,6 @@
 import React, {useState} from 'react';
 import {Link} from "react-router-dom";
+import axios from 'axios';
 import {getUser, updateUser} from '../mockAPI'; //Dot forget to replace with real API
 
 export default function LoginContainer() {
@@ -29,27 +30,41 @@ export default function LoginContainer() {
     };
 
     //Login authorization
-    const authorize = (e) => {
+    const authorize = async (e) => {
         //prevents the browser from performing its default behavior when a form is submitted.
         //prevent page from refreshing
         e.preventDefault();
 
         //Login authorization code
-        //Replace this code by an authorization with the Database
         
-        if (loginContainerState.userNameInput === getUser(loginContainerState.userNameInput).username && 
-            loginContainerState.passwordInput === getUser(loginContainerState.userNameInput).password) {
+        
+        /*
+        axios.put(`http://localhost:3001/api/getUserByPasswd/${loginContainerState.userNameInput}`,
+                    {password: loginContainerState.passwordInput})
+                .then(response => {
+                    console.log(response.data);
+                });
+        */
 
+        let response = await axios.put(`http://localhost:3001/api/getUserByPasswd/${loginContainerState.userNameInput}`,
+                {password: loginContainerState.passwordInput});
+
+        console.log("=================");
+        console.log(response.data);
+        
+        
             //Change user status to logged in
             updateUser(loginContainerState.userNameInput, 'isLoggedIn', true) // Dont forget to replace this with real API function
             updateUser(loginContainerState.userNameInput, 'lastLogin', new Date()) // Dont forget to replace this with real API function
 
             //Go to the dashboard after authorization is success (dont forget to replace the url with a real production url)
-            window.location.href = 'http://localhost:3000/dashboard';
+            //window.location.href = 'http://localhost:3000/dashboard';
         //Failed login
+        /*
         } else {
             alert("Your username or password is wrong");
         }
+        */
     };
 
     return (
