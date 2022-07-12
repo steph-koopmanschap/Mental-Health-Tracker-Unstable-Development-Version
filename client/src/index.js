@@ -14,6 +14,7 @@ import ForgotPasswordContainer from './components/ForgotPasswordContainer';
 import DashboardPage from './components/DashboardPage';
 import AddEntryPage from './components/AddEntryPage';
 import ViewEntriesPage from './components/ViewEntriesPage';
+import EntryOverViewPage from './components/EntryOverviewPage';
 
 /*
   The Main Routing file for this app  
@@ -39,6 +40,7 @@ root.render(
             <Route path="/dashboard" element={<DashboardPage />} />
             <Route path="/add-entry" element={<AddEntryPage />} />
             <Route path="/view-entries" element={<ViewEntriesPage />} />
+            <Route path="/entry-overview" element={<EntryOverViewPage />} />
             <Route path="*" element={<NotFound />} />
           </Route>
       </Routes>

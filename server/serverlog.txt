@@ -1,0 +1,3 @@
+==================================================================
+Request received at:"/createUser/tinyMouse"
+Request data: Params{} body: {"user":{"userId":599,"name":"Tiny Mouse","username":"tinyMouse","email":"tinyMouse@example.com","password":"PEEP","age":7,"lastLogin":"01-05-2022","isLoggedIn":false,"entries":[{"entryId":0,"date":"30-04-2022","type":"stress","level":6,"event":["work"],"notes":"I AM A COOL NEW USER."},{"entryId":1,"date":"01-05-2022","type":"anxiety","level":8,"event":["family"],"notes":"I AM A NEW USER."}]}}

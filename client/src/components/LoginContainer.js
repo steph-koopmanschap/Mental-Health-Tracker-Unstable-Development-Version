@@ -1,9 +1,11 @@
 import React, {useState} from 'react';
-import {Link} from "react-router-dom";
+import {Link, useNavigate} from "react-router-dom";
 import axios from 'axios';
-import {getUser, updateUser} from '../mockAPI'; //Dot forget to replace with real API
 
 export default function LoginContainer() {
+
+    //Used for navigating to different routes in the client without buttons
+    const navigate = useNavigate();
 
     /*
         You can use any account in mockData.js to login. Just use the values of username and password.
@@ -36,35 +38,23 @@ export default function LoginContainer() {
         e.preventDefault();
 
         //Login authorization code
-        
-        
-        /*
-        axios.put(`http://localhost:3001/api/getUserByPasswd/${loginContainerState.userNameInput}`,
-                    {password: loginContainerState.passwordInput})
-                .then(response => {
-                    console.log(response.data);
-                });
-        */
-
-        let response = await axios.put(`http://localhost:3001/api/getUserByPasswd/${loginContainerState.userNameInput}`,
+        try {
+            //Ask the server to login the user. See /server/APIrouter.js and /server/mockAPI.js to see how this works.  || // eslint-disable-next-line
+            let response = await axios.put(`http://localhost:3001/api/loginUser/${loginContainerState.userNameInput}`,
                 {password: loginContainerState.passwordInput});
-
-        console.log("=================");
-        console.log(response.data);
-        
-        
-            //Change user status to logged in
-            updateUser(loginContainerState.userNameInput, 'isLoggedIn', true) // Dont forget to replace this with real API function
-            updateUser(loginContainerState.userNameInput, 'lastLogin', new Date()) // Dont forget to replace this with real API function
-
+                    
+                                    //alert("password is correct");
+            //Succesful Login
             //Go to the dashboard after authorization is success (dont forget to replace the url with a real production url)
-            //window.location.href = 'http://localhost:3000/dashboard';
-        //Failed login
-        /*
-        } else {
+            navigate("/dashboard");
+        } catch (error) {
+            //Failed login (Error 404 response from server)
+            //This error happens if:
+            // 1. Server can not be reached.
+            // 2. User with that username is not found.
+            // 3. User is found, but password does not match the password if the user.
             alert("Your username or password is wrong");
         }
-        */
     };
 
     return (

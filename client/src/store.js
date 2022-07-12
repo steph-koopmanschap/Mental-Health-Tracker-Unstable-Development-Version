@@ -1,6 +1,5 @@
 import { configureStore, createSlice, createAsyncThunk } from '@reduxjs/toolkit';
-//Dont forget to replace these imported MockAPI functions with real ones.
-import {getUser} from './mockAPI';
+import axios from 'axios';
 
 // The Global State Logic of the app. Implemented with React Redux and Redux Toolkit
 
@@ -11,7 +10,7 @@ import {getUser} from './mockAPI';
 export const fetchUserData = createAsyncThunk(
     'userData/FetchUserData',
     async (username) => {
-        return await getUser(username); //Replace this with a real API function
+        return await axios.get(`http://localhost:3001/api/getUser/${username}`);
     }
 );
 
@@ -28,6 +27,7 @@ export const userDataSlice = createSlice(
             isLoadingUser: false,
             failedToLoadUser: false
         },
+        //reducers: {},
         extraReducers: {
             [fetchUserData.pending]: (state) => {
                 state.isLoadingUser = true;
@@ -45,15 +45,19 @@ export const userDataSlice = createSlice(
         },
     });
 
-    /*
+/*
+
 // The 'slice' or part of the global state handling the global entries state
 export const entriesDataSlice = createSlice(
     {
         name: 'entriesData',
         initialState: {},
+        reducers: {},
         extraReducers: {},
     });
+
 */
+
 // +++ The actual Global State +++
 // This global state combines all the partial global stats called 'slices' into the final combined global state
 export default configureStore(

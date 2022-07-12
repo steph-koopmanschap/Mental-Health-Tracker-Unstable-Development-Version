@@ -7,7 +7,7 @@ export default function DashboardPage() {
     // Load username (from database) when the component mounts
     // Not complete yet
     useEffect( () => {
-        setName("Peter");
+        setName("Your should be username here");
     }, []);
 
     //Log out code
@@ -23,6 +23,7 @@ export default function DashboardPage() {
             <Link to="/add-entry"><button>Add new entry</button></Link>
             <br />
             <Link to="/view-entries"><button>View my entries</button></Link>
+            <Link to="/entry-overview"><button>Mental Health Overview</button></Link>
             <br />
             <Link to="/"><button onClick={logOut}>Logout</button></Link>
         </div>
