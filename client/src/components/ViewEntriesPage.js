@@ -1,18 +1,17 @@
 import React, {useEffect} from "react";
 import {useDispatch, useSelector} from 'react-redux';
-import {Link} from "react-router-dom";
-import {fetchEntries} from "../store";
+import {fetchEntries} from '../redux/entryDataSlice.js';
 import Entry from "./Entry";
 import NavBtnDefault from "./NavBtnDefault";
 
 export default function ViewEntriesPage() {
     const dispatch = useDispatch();
-    const username = useSelector(state => state.userData.userInfo.username);
+    const userID = useSelector(state => state.userData.userInfo.user_id);
     const entryDataGlobalState = useSelector(state => state.entryData);
 
     //Get all the user's entries when this component mounts.
     useEffect( () => {
-        dispatch(fetchEntries(username));
+        dispatch(fetchEntries(userID));
     }, []);
 
     // Insert an H3 if the data is still loading.
@@ -46,7 +45,7 @@ export default function ViewEntriesPage() {
             {noEntries}
             <div className="rounded py-1 shadow-md bg-white">
                 {entryDataGlobalState.entryInfo.map( (entry) =>
-                <Entry key={entry.entryId} entryInfo={entry}/>)}
+                <Entry key={entry.entry_id} entryInfo={entry}/>)}
             </div>
         </div>
     )
