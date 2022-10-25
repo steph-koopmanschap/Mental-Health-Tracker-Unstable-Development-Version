@@ -22,7 +22,7 @@ function userAuthenthication(app, pool) {
         //saveUninitialized: Forces a session that is “uninitialized” to be saved to the store. 
         //A session is uninitialized when it is new but not modified Reccomended: False (more security)
         saveUninitialized: false,
-        sameSite: "none",
+        sameSite: 'none', //If sameSite = "none" then secure must be TRUE
         secure: false //HTTPS 
     }));
     //User authenthication middleware

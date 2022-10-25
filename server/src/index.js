@@ -5,6 +5,7 @@
 //Imports
 const express = require('express');
 //Middlewares
+const customCors = require('./middlewares/customCors.js');
 const loadDefaultMiddlewares = require('./middlewares/defaultMiddlewares.js');
 const logging = require("./middlewares/logging.js");
 const debug = require("./middlewares/debug.js");
@@ -12,7 +13,7 @@ const userAuthenthication = require("./middlewares/userAuthenthication.js");
 const rateLimiter = require('./middlewares/rateLimiter.js');
 const loadRouters = require('./middlewares/routes.js');
 //Load the .env config file
-require('dotenv').config(); 
+require('dotenv').config();
 //Import connection for PostGreSQL
 const pool = require("./db_connection.js");
 
@@ -33,7 +34,7 @@ app.set('trust proxy', 1);
 
 //You can set the environment variable PORT to tell your web server what port to listen on.
 //If no port is set e.g. node index.js then port 3000 will be used by default
-var port = normalizePort(process.env.PORT || '3000');
+var port = normalizePort(process.env.PORT || '3001');
 app.set('port', port);
 
 const verboseLogging = false;
@@ -67,6 +68,7 @@ function defaultPortWarning() {
 // =================================================================
 
 // LOAD MIDDLEWARES
+customCors(app);
 loadDefaultMiddlewares(app);
 logging(app);
 if (process.env.NODE_ENV === 'development' && verboseLogging === true) {app.use(debug);}
