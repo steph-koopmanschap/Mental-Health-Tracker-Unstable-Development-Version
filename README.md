@@ -26,3 +26,9 @@ Steps 0 to 3 only need to be done one time.
 * client - All client front-end files. (React) 
 * server - All server back-end files. (ExpressJS + PostGreSQL) 
 
+## Screenshots
+
+![feelsify screenshot1](/screenshots/screenshot1.png?raw=true)
+![feelsify screenshot2](/screenshots/screenshot2.png?raw=true)
+![feelsify screenshot3](/screenshots/screenshot3.png?raw=true)
+![feelsify screenshot4](/screenshots/screenshot4.png?raw=true)
